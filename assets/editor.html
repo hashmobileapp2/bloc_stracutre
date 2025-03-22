@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CKEditor with Mention and Profile Image</title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
+    <style>
+        /* Style the mention list with images */
+        .ck-editor__mention-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ck-editor__mention-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .ck-editor__mention-item img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .ck-editor__mention-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div id="editor"></div>
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            plugins: [ Essentials, Paragraph, Bold, Mention ],
+            mention: {
+                feeds: [
+                    {
+                        marker: '@',
+                        feed: [
+                            { id: 'user1', text: '@John Doe', imageUrl: 'https://example.com/john.jpg' },
+                            { id: 'user2', text: '@Jane Smith', imageUrl: 'https://example.com/jane.jpg' },
+                            { id: 'user3', text: '@Alice Brown', imageUrl: 'https://example.com/alice.jpg' }
+                        ],
+                        minimumCharacters: 1
+                    }
+                ]
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+</body>
+</html>
